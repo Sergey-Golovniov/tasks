@@ -1,6 +1,7 @@
 "use strict"
 async function chainPromises(functions) {
-  // Your implementation here
+  let everythingIsReady = await Promise.allSettled(functions.map(func => func()));
+  return everythingIsReady.map(item => (item.value ?? item.reason));
 }
 
 // Test functions that return promises
