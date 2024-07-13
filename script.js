@@ -1,6 +1,19 @@
 // Implement the runTasks function
 function runTasks(tasks, finalCallback) {
-  // Your code here
+  function runTask(index) {
+    if (index >= tasks.length) {
+      return finalCallback(); // All tasks completed successfully
+    }
+
+    tasks[index]((err) => {
+      if (err) {
+        return finalCallback(err); // An error occurred, stop further execution
+      }
+      runTask(index + 1); // Proceed to the next task
+    });
+  }
+
+  runTask(0); // Start with the first task
 }
 
 // Example asynchronous tasks with error handling
