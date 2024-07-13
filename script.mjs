@@ -3,12 +3,21 @@
 let range = {
   from: 1,
   to: 5,
-  // method here
+
+  *[Symbol.iterator]() {
+    for (let i = this.from; i < this.to; i++) {
+      yield i
+    }
+  }
 };
 
 console.log([...range]); // [ 1, 2, 3, 4, 5 ]
 
-// generator here
+async function* generateSequence(from, to) {
+  for (let i = from; i <= to; i++) {
+    yield await new Promise(resolve => setTimeout(resolve, 100, i))
+  }
+}
 
 let generator = generateSequence(1, 5);
 for await (let value of generator) {
