@@ -6,6 +6,34 @@ let user = {
 };
 
 // write proxy
+user = new Proxy(user, {
+  get(target, prop) {
+    if (prop.startsWith('_')) {
+      throw new Error("Access denied");
+    }
+    let value = target[prop];
+    return (typeof value === 'function') ? value.bind(target) : value;
+  },
+  set(target, prop, val) {
+    if (prop.startsWith('_')) {
+      throw new Error("Access denied");
+    } else {
+      target[prop] = val;
+      return true;
+    }
+  },
+  deleteProperty(target, prop) {
+    if (prop.startsWith('_')) {
+      throw new Error("Access denied");
+    } else {
+      delete target[prop];
+      return true;
+    }
+  },
+  ownKeys(target) {
+    return Object.keys(target).filter(key => !key.startsWith('_'));
+  }
+});
 
 try {
   console.log(user._password);
