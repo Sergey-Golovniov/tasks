@@ -1,6 +1,15 @@
 "use strict"
 
 // write curry function
+const curry = function (fn) {
+  return function (...args) {
+    if (args.length >= fn.length) {
+      return fn.call(this, ...args)
+    } else {
+      return fn.bind(this, ...args);
+    }
+  }
+}
 
 const user = {
   name: "John",
