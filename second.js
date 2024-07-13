@@ -30,12 +30,6 @@
   }
 
   // Test calls
-  requestFibonacci(40); // Fibonacci(40): 102334155
-  requestFibonacci(39); // Fibonacci(39): 63245986
-  requestFibonacci(40); // Fibonacci(40): 102334155
-
-  let timerId = setTimeout(function tick() {
-    console.log("tick")
-    timerId = setTimeout(tick, 500)
-  }, 500)
+  requestFibonacci(38); // Fibonacci(38): 39088169
+  requestFibonacci(39); // Fibonacci(39): 63245986 
 }
