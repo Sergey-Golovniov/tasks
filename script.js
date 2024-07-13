@@ -17,7 +17,17 @@ function fetchUserData(userId, callback) {
 }
 
 // Your task: Promisify fetchUserData
-
+function fetchUserDataPromise(userId) {
+  return new Promise(function (resolve, reject) {
+    fetchUserData(userId, function (error, response) {
+      if (error) {
+        reject(error)
+      } else {
+        resolve(response);
+      }
+    })
+  })
+}
 // Test calls - Replace fetchUserData with your promisified function
 
 // Test call 1
